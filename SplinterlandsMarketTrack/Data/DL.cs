@@ -12,7 +12,7 @@ namespace SplinterlandsMarketTrack.Data
 {
     public static partial class dataLayer
     {
-        public static string versao = "v.1.0";
+        public static string versao = "v.1.01";
         public static string pasta_dados;
         public static string base_dados;
         //--------------------------------------------------------------------
@@ -47,6 +47,7 @@ namespace SplinterlandsMarketTrack.Data
                                     "id                             int not null primary key,      " +
                                     "dec                            nvarchar(20),                  " +
                                     "usd                            nvarchar(20),                  " +
+                                    "totalrents                     nvarchar(20),                  " +
                                     "date                           datetime                       )";
             comando.Connection = ligacao;
             comando.ExecuteNonQuery();

@@ -1,10 +1,17 @@
 ﻿
+using SplinterlandsMarketTrack.Data;
 using SplinterlandsMarketTrack.Network;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Mail;
 using System.Text;
+using System.Windows.Forms;
+using System.Xml.Serialization;
 
 internal static class UtilsHelpers
 {
@@ -99,4 +106,106 @@ internal static class UtilsHelpers
         return totalRent;
     }
 
+    public class EmailServerConfig
+    {
+        public string smtpClient { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+    }
+
+    public static string SendEmail(EmailServerConfig credentials, string subject, string body, Attachment attachmentFilename = null)
+    {
+        try
+        {
+            var smtpClient = new SmtpClient(credentials.smtpClient)
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(credentials.username, credentials.password),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(credentials.username),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true,
+            };
+            mailMessage.To.Add(credentials.username);
+            if (attachmentFilename != null)
+                mailMessage.Attachments.Add(attachmentFilename);
+
+            smtpClient.Send(mailMessage);
+
+            return "your email was sent successfully!";
+        }
+        catch (Exception ex)
+        {
+
+            return "!not sent, some error occurred!";
+        }
+    }
+    public static int CreateCsv(List<LineOnRent> myHistory, string filePath)
+    {
+        // Prepare the values
+        var allLines = (from item in myHistory
+                        select new object[]
+                        {
+                        item.id,
+                        item.sell_trx_id,
+                        item.card_id,
+                        item.buy_price,
+                        item.payment_amount,
+                        item.rental_days,
+                        item.rental_date.ToString("yyyy-MM-dd"),
+                        item.next_rental_payment.ToString("yyyy-MM-dd")
+                        }).ToList();
+
+        // Build the file content
+        var csv = new StringBuilder();
+        allLines.ForEach(line =>
+        {
+            csv.AppendLine(string.Join(",", line));
+        });
+
+        File.WriteAllText(filePath, csv.ToString());
+        return 1;
+    }
+
+
+    public static int CreateXML(List<LineOnRent> myHistory, string filePath)
+    {
+
+        DateTime currentDate = DateTime.Now;
+        DateTime lastWeek = currentDate.Subtract(TimeSpan.FromDays(7));
+
+        var filterOfHistory = new List<LineOnRent>();
+        foreach (var lineOnRent in myHistory)
+        {
+            if (lineOnRent.rental_date >= lastWeek)
+            {
+                filterOfHistory.Add(lineOnRent);
+            }
+
+        }
+
+
+        string history = "Last Week";
+        DataXML data = new DataXML
+        {
+            history = history,
+            transaction = filterOfHistory
+        };
+
+        // serializar 
+        string caminho = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+        XmlSerializer serializer = new XmlSerializer(typeof(DataXML));
+        using (TextWriter writer = new StreamWriter(caminho))
+        {
+            serializer.Serialize(writer, data);
+        }
+
+        return 1;
+
+    }
 }
