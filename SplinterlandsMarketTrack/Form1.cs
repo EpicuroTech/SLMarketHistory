@@ -21,9 +21,9 @@ namespace SplinterlandsMarketTrack
     {
         public Form1()
         {
-            float version = 1.0F;
+            string version = dataLayer.versao;
             InitializeComponent();
-            labelVersion.Text = $"Version: {version:0.00}\n @CarlosDias";
+            labelVersion.Text = $"Version: {version}\n @CarlosDias";
         }
 
         List<LineOnRent> myHistory = new List<LineOnRent>();
@@ -151,7 +151,7 @@ namespace SplinterlandsMarketTrack
             UtilsHelpers.EmailServerConfig credentials = new UtilsHelpers.EmailServerConfig();
             credentials.smtpClient = "smtp.office365.com";// SENDER SMTP EMAIL PROVIDER 
             credentials.username = "a5040@alunos.ipca.pt";// EMAIL AND PASSWORD FROM THE SENDER!!!!
-            credentials.password = null;//"***********";// EMAIL AND PASSWORD FROM THE SENDER!!!!
+            credentials.password = null;// EMAIL AND PASSWORD FROM THE SENDER!!!!
 
             //iniciar ao abrir aplicação
             var pasta_dados = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\DBSplinterLands\";

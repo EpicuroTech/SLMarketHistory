@@ -18,9 +18,19 @@ namespace SplinterlandsMarketTrack.Network
             var myHistory = new List<LineOnRent>();
             using (var client = new HttpClient())
             {
-                var endpoint = new Uri($@"https://api.splinterlands.com/market/rental_history?username={player}&limit=200&skip={skip}&offset={offset}");
-                var result = client.GetAsync(endpoint).Result;
-                var json = result.Content.ReadAsStringAsync().Result;
+                var endpoint = new Uri(
+                    $@"https://api.splinterlands.com/market/rental_history?username={player}&limit=200&skip={skip}&offset={offset}"
+                    );
+
+                Task<HttpResponseMessage> httpResponse = client.GetAsync(endpoint);
+                HttpResponseMessage response = httpResponse.Result;
+                var json = response.Content.ReadAsStringAsync().Result;
+
+                //ou!
+                //var result = client.GetAsync(endpoint).Result;
+                //var json = result.Content.ReadAsStringAsync().Result;
+
+
                 myHistory = JsonConvert.DeserializeObject<List<LineOnRent>>(json);
 
             }

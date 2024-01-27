@@ -15,15 +15,16 @@ namespace SplinterlandsMarketTrack
         [STAThread]
         static void Main()
         {
+
+            //JOB!
+            //Jobs.Job.routine("epicurotech");
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            //inicia a aplicacao
             dataLayer.Iniciar();
-
-            //Abre o nosso formulario inicial
-
             Application.Run(new Form1());
         }
     }

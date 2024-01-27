@@ -163,6 +163,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Jobs\Job.cs" />
     <Compile Include="Network\ApiClient.cs" />
     <Compile Include="Network\Post.cs" />
     <Compile Include="Program.cs" />

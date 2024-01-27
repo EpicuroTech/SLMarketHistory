@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace SplinterlandsMarketTrack.Network
 {
+
+    //class exemplo para um post!!!!!
     public class Post
     {
         public string Title {  get; set; }
