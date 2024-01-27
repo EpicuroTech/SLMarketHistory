@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplinterlandsMarketTrack", "SplinterlandsMarketTrack\SplinterlandsMarketTrack.csproj", "{F21D1BFE-8250-4410-A949-AF986F6CE87A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F21D1BFE-8250-4410-A949-AF986F6CE87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21D1BFE-8250-4410-A949-AF986F6CE87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F21D1BFE-8250-4410-A949-AF986F6CE87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F21D1BFE-8250-4410-A949-AF986F6CE87A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {827E26E3-D990-4D7A-A4E8-8FE82E59072D}
+	EndGlobalSection
+EndGlobal
